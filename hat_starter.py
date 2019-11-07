@@ -2,29 +2,31 @@ from sense_hat import SenseHat
 import time
 import os
 sense = SenseHat()
-quien_fue_el_ultimo_diganme_la_verdad = '¯\_(ツ)_/¯'
-sense.low_light = True
-
+quien_fue_el_ultimo_diganme_la_verdad = 'rainbow'
+os.system("python3 /home/pi/hat_seismometer/rainbow.py")
 while True:
     time.sleep(.1)
     direccion = sense.stick.wait_for_event().direction
     accion = sense.stick.wait_for_event().action
     if direccion != 'middle' and accion == 'released' and quien_fue_el_ultimo_diganme_la_verdad != 'clear':
-        print (direccion, accion)
         quien_fue_el_ultimo_diganme_la_verdad = 'clear'
-        os.system("python3 /home/pi/hat/hat_clear.py")
+        os.system("python3 /home/pi/hat_seismometer/hat_clear.py")
+    elif direccion != 'middle' and accion == 'released' and quien_fue_el_ultimo_diganme_la_verdad != 'rainbow':
+        os.system("python3 /home/pi/hat_seismometer/rainbow.py")
+        quien_fue_el_ultimo_diganme_la_verdad = 'rainbow'
     elif direccion == "middle" and accion == 'released' and quien_fue_el_ultimo_diganme_la_verdad != 'dog':
-        print (direccion, accion)
         quien_fue_el_ultimo_diganme_la_verdad = 'dog'
-        os.system("python3 /home/pi/hat/hat_dog.py")
-    elif direccion != 'middle' and accion == 'released' and quien_fue_el_ultimo_diganme_la_verdad != 'leds':
-        print (direccion, accion)
-        sense.set_pixel(2, 2, 245, 0, 135)
-        sense.set_pixel(2, 5, 245, 0, 135)
-        sense.set_pixel(5, 2, 245, 0, 135)
-        sense.set_pixel(5, 5, 245, 0, 135)
-        quien_fue_el_ultimo_diganme_la_verdad = 'leds'
-    
+        os.system("python3 /home/pi/hat_seismometer/hat_dog.py")
+
+
+#    elif direccion != 'middle' and accion == 'released' and quien_fue_el_ultimo_diganme_la_verdad != 'leds':
+#        print (direccion, accion)
+#        sense.set_pixel(2, 2, 245, 0, 135)
+#        sense.set_pixel(2, 5, 245, 0, 135)
+#        sense.set_pixel(5, 2, 245, 0, 135)
+#        sense.set_pixel(5, 5, 245, 0, 135)
+#        quien_fue_el_ultimo_diganme_la_verdad = 'leds'
+#
 
 # and os.system('pgrep -fc "hat_dog.py"') < 1:
 

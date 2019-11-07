@@ -52,13 +52,15 @@ def alerta_4():
     sense.clear(245, 0, 135)
 
 def death_check(death):
-    if death > 0 and death < 9:
+    if death == 0:
+        sense.clear()
+    elif death > 0 and death < 29:
         alerta_1()
-    elif death > 9 and death < 19:
+    elif death > 29 and death < 59:
         alerta_2()
-    elif death > 19 and death < 29:
+    elif death > 59 and death < 99:
         alerta_3()
-    elif death > 29:
+    elif death > 99:
         alerta_4()
 
 def tigresa_oriente():
@@ -66,7 +68,7 @@ def tigresa_oriente():
     sense.set_pixel(7, 7, 245, 0, 135)
     sense.set_pixel(7, 0, 245, 0, 135)
     sense.set_pixel(0, 7, 245, 0, 135)
-    death = 0
+    death = int(0)
     old_degs = sense.get_orientation_degrees()
     while True:
         new_degs = sense.get_orientation_degrees()
@@ -76,22 +78,18 @@ def tigresa_oriente():
         for event in sense.stick.get_events():
             if event.action == "released" and event.direction != 'middle':
                 exit()
-        if yaw >.04 and yaw < 180:
+        if yaw >.05 and yaw < 180:
             death +=1
-            death_check(death)
-        elif pitch >.04 and pitch < 180:
+        elif pitch >.05 and pitch < 180:
             death +=1
-            death_check(death)
-        elif roll >.04 and roll < 180:
+        elif roll >.05 and roll < 180:
             death +=1
-            death_check(death)
         else:
-            if death > 3:
-                death = death-3
-            elif death < 3:
+            if death >= 2:
+                death -=2
+            elif death < 2:
                 death = 0
-                sense.clear()
-        
+        death_check(death)
         old_degs = new_degs
 
 tigresa_oriente()
