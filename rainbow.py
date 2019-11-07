@@ -50,8 +50,10 @@ while True:
     for pix in pixels:
         next_colour(pix)
         for event in sense.stick.get_events():
-            if event.action != "whateva":
+            if event.direction != "i dont care":
+                sense.clear()
                 exit()
+
 
     sense.set_pixels(pixels)
     msleep(2)

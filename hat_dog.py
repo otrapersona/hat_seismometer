@@ -5,6 +5,84 @@ import time
 
 sense.low_light = True
 
+def fourth():
+    X = [245, 0, 135]  # pink
+    O = [0, 0, 0]  # nothing
+    sense.set_pixels([
+    X, X, X, X, X, X, X, X,
+    X, O, O, O, O, O, O, X,
+    X, O, O, O, O, O, O, X,
+    X, O, O, O, O, O, O, X,
+    X, O, O, O, O, O, O, X,
+    X, O, O, O, O, O, O, X,
+    X, O, O, O, O, O, O, X,
+    X, X, X, X, X, X, X, X
+    ])
+
+def third():
+    X = [245, 0, 135]  # pink
+    O = [0, 0, 0]  # nothing
+    sense.set_pixels([
+    O, O, O, O, O, O, O, O,
+    O, X, X, X, X, X, X, O,
+    O, X, O, O, O, O, X, O,
+    O, X, O, O, O, O, X, O,
+    O, X, O, O, O, O, X, O,
+    O, X, O, O, O, O, X, O,
+    O, X, X, X, X, X, X, O,
+    O, O, O, O, O, O, O, O
+    ])
+
+def second():
+    X = [245, 0, 135]  # pink
+    O = [0, 0, 0]  # nothing
+    sense.set_pixels([
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, X, X, X, X, O, O,
+    O, O, X, O, O, X, O, O,
+    O, O, X, O, O, X, O, O,
+    O, O, X, X, X, X, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O
+    ])
+
+def first():
+    X = [245, 0, 135]  # pink
+    O = [0, 0, 0]  # nothing
+    sense.set_pixels([
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, X, X, O, O, O,
+    O, O, O, X, X, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, O, O, O, O
+    ])
+
+def byeFelicia():
+    fourth()
+    time.sleep(.1)
+    third()
+    time.sleep(.1)
+    second()
+    time.sleep(.1)
+    first()
+    time.sleep(.1)
+    sense.clear()
+
+def hellobaby():
+    first()
+    time.sleep(.1)
+    second()
+    time.sleep(.1)
+    third()
+    time.sleep(.1)
+    fourth()
+    time.sleep(.1)
+    sense.clear()
+
 def alerta_1():
     X = [245, 0, 135]  # pink
     O = [0, 0, 0]  # nothing
@@ -47,7 +125,6 @@ def alerta_3():
     O, O, O, O, O, O, O, O
     ])
 
-
 def alerta_4():
     sense.clear(245, 0, 135)
 
@@ -64,10 +141,7 @@ def death_check(death):
         alerta_4()
 
 def tigresa_oriente():
-    sense.set_pixel(0, 0, 245, 0, 135)
-    sense.set_pixel(7, 7, 245, 0, 135)
-    sense.set_pixel(7, 0, 245, 0, 135)
-    sense.set_pixel(0, 7, 245, 0, 135)
+    hellobaby()
     death = int(0)
     old_degs = sense.get_orientation_degrees()
     while True:
@@ -76,7 +150,8 @@ def tigresa_oriente():
         pitch=abs(abs(new_degs['pitch'])-abs(old_degs['pitch']))
         roll=abs(abs(new_degs['roll'])-abs(old_degs['roll']))
         for event in sense.stick.get_events():
-            if event.action == "released" and event.direction != 'middle':
+            if event.action != "idontcare" and event.direction != "middle":
+                byeFelicia()
                 exit()
         if yaw >.05 and yaw < 180:
             death +=1
