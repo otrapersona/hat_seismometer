@@ -3,7 +3,10 @@ import time
 from sense_hat import SenseHat
 
 sense = SenseHat()
-sense.low_light = True
+from light import is_it_darks
+is_it_darks()
+
+#sense.low_light = True
 
 pixels = [
     [255, 0, 0], [255, 0, 0], [255, 87, 0], [255, 196, 0], [205, 255, 0], [95, 255, 0], [0, 255, 13], [0, 255, 122],

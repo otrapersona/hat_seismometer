@@ -3,7 +3,9 @@ sense = SenseHat()
 from datetime import datetime
 import time
 
-sense.low_light = True
+#sense.low_light = True
+from light import is_it_darks
+is_it_darks()
 
 def fourth():
     X = [245, 0, 135]  # pink
