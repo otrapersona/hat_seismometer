@@ -130,11 +130,11 @@ def alerta_4():
 def death_check(death):
     if death == 0:
         sense.clear()
-    elif 0 < death < 29:
+    elif 19 < death < 39:
         alerta_1()
-    elif 29 < death < 59:
+    elif 39 < death < 59:
         alerta_2()
-    elif 59 < death < 99:
+    elif 59 < death < 79:
         alerta_3()
     elif death > 99:
         alerta_4()
@@ -147,17 +147,23 @@ def tigresa_oriente():
     while True:
         new_degs = sense.get_orientation_degrees()
         yaw=abs(abs(new_degs['yaw'])-abs(old_degs['yaw']))
+        if yaw > 180:
+            yaw = abs(yaw - 360)
         pitch=abs(abs(new_degs['pitch'])-abs(old_degs['pitch']))
+        if pitch > 180:
+            pitch = abs(pitch - 360)
         roll=abs(abs(new_degs['roll'])-abs(old_degs['roll']))
+        if roll > 180:
+            roll = abs(roll - 360)
         for event in sense.stick.get_events():
             if event.action != "idontcare" and event.direction != "middle":
                 byeFelicia()
                 exit()
-        if .05 < yaw < 180:
+        if .8 < yaw < 180:
             death +=1
         elif .05 < pitch < 180:
             death +=1
-        elif .05 < roll < 180:
+        elif .2 < roll < 180:
             death +=1
         else:
             if death >= 2:
