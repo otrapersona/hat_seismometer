@@ -4,8 +4,19 @@ from sense_hat import SenseHat
 sense = SenseHat
 
 def debugo(t):
-    file=open("luz.csv","w")
+    file=open("is_it_darks.txt","w")
     file.write(f"T{t}")
+    file.close()
+
+def reader():
+    file=open("is_it_darks.txt","r")
+    darks = file.read()
+    sense.low_light = darks
+
+def saver():
+    darks = is_it_darks()
+    file=open("is_it_darks.txt","w")
+    file.write(darks)
     file.close()
 
 def is_it_darks():
@@ -37,12 +48,12 @@ def is_it_darks():
         if i==10:
                 t=t/i
                 if t>100:
-                    sense.low_light = True
                     i=0
                     t=0
-                    return
+                    return "True"
+                    #sense.low_light = True
                 elif t<=100:
-                    sense.low_light = False
                     i=0
                     t=0
-                    return
+                    return "False"
+                    #sense.low_light = True

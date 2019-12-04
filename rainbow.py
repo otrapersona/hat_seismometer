@@ -1,11 +1,10 @@
 #!/usr/bin/python
 import time
 from sense_hat import SenseHat
+import light
 
 sense = SenseHat()
-from light import is_it_darks
-is_it_darks()
-
+light.reader()
 #sense.low_light = True
 
 pixels = [

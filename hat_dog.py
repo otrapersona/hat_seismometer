@@ -2,10 +2,7 @@ from sense_hat import SenseHat
 sense = SenseHat()
 from datetime import datetime
 import time
-
-#sense.low_light = True
-from light import is_it_darks
-is_it_darks()
+import light
 
 def fourth():
     X = [245, 0, 135]  # pink
@@ -133,16 +130,17 @@ def alerta_4():
 def death_check(death):
     if death == 0:
         sense.clear()
-    elif death > 0 and death < 29:
+    elif 0 < death < 29:
         alerta_1()
-    elif death > 29 and death < 59:
+    elif 29 < death < 59:
         alerta_2()
-    elif death > 59 and death < 99:
+    elif 59 < death < 99:
         alerta_3()
     elif death > 99:
         alerta_4()
 
 def tigresa_oriente():
+    light.reader()
     hellobaby()
     death = int(0)
     old_degs = sense.get_orientation_degrees()
@@ -155,11 +153,11 @@ def tigresa_oriente():
             if event.action != "idontcare" and event.direction != "middle":
                 byeFelicia()
                 exit()
-        if yaw >.05 and yaw < 180:
+        if .05 < yaw < 180:
             death +=1
-        elif pitch >.05 and pitch < 180:
+        elif .05 < pitch < 180:
             death +=1
-        elif roll >.05 and roll < 180:
+        elif .05 < roll < 180:
             death +=1
         else:
             if death >= 2:

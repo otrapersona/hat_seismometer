@@ -2,6 +2,11 @@ from sense_hat import SenseHat
 import time
 import os
 sense = SenseHat()
+import light
+
+light.saver()
+light.reader()
+
 quien_fue_el_ultimo_diganme_la_verdad = [0,0,0]
 os.system("python3 /home/pi/hat_seismometer/rainbow.py")
 while True:
